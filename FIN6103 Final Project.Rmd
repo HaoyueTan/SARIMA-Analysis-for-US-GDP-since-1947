@@ -1,0 +1,61 @@
+---
+title: "FIN6103 Final Project"
+author: "Haoyue Heather Tan"
+date: "12/8/2021"
+output: pdf_document
+---
+```{r}
+df <- read.csv("GDP_US_Quarterly.csv",header=TRUE, row.names="X")
+#df
+```
+
+```{r fig1, fig.height = 3, fig.width = 10, fig.align = "center"}
+yt <- df$GDP
+fig1 <- plot(yt, type = "o")
+```
+```{r}
+par(mfrow=c(2,2))
+acf(yt)
+pacf(yt)
+```
+
+
+```{r}
+yt1 <- log(yt)
+yt2 <- diff(yt1)
+fig2 <- plot(yt2, type = "o")
+par(mfrow=c(2,2))
+acf(yt2)
+pacf(yt2)
+```
+```{r}
+library(forecast)
+auto.arima(yt2, seasonal = T)
+```
+
+
+```{r}
+library(astsa)
+sarima (yt2, 1,1,2,0,0,1,4)
+```
+```{r}
+sarima (yt2, 1,1,2,1,0,0,4)
+```
+
+```{r}
+sarima (yt2, 1,1,2,1,0,1,4)
+```
+```{r}
+sarima (yt2, 1,1,2,2,0,2,4)
+```
+
+```{r}
+sarima (yt2, 1,1,2,1,1,1,4)
+```
+
+```{r}
+sarima (yt2, 1,1,2,2,2,2,4)
+```
+
+
+
